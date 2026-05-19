@@ -17,6 +17,11 @@ export const register = async(req, res) => {
                 resolve(results);
             });
         });
+
+        if (checkUserResult.length > 0) {
+            return res.status(409).json({ message: 'User already exists' });
+        }
+
         // Insert new user into database
         const insertUserQuery = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
         db.query(insertUserQuery, [username, email, hashedPassword], (err, results) => {
