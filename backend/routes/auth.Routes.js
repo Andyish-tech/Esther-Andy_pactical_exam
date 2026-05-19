@@ -1,6 +1,6 @@
-import router from "express";
+import express from "express";
 import db from "../db/db.js";
-const myRouter = router.Router();
+const myRouter = express.Router();
 import { register, login } from "../controllers/authController.js";
 
 myRouter.post('/register', register);
