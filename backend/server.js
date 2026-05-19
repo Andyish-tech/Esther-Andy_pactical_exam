@@ -6,6 +6,7 @@ import authRoutes from './routes/auth.Routes.js';
 import carRoutes from './routes/car.Routes.js';
 import serviceRoutes from './routes/service.Routes.js';
 import serviceRecordRoutes from './routes/serviceRecord.Routes.js';
+import paymentRoutes from './routes/payment.Routes.js';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/cars', carRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/service-records', serviceRecordRoutes);
+app.use('/api/payments', paymentRoutes);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
