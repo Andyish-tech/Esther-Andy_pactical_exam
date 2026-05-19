@@ -1,9 +1,10 @@
 import router from "express";
 const myRouter = router.Router();
 import{getAllServices, createService, deleteService, updateService, getServiceByCode} from "../controllers/serviceController.js";
-myRouter.get('/', getAllServices);
-myRouter.post('/create', createService);
-myRouter.delete('/:serviceCode', deleteService);
-myRouter.put('/:serviceCode', updateService);
-myRouter.get('/:serviceCode', getServiceByCode);
+import { verifyToken } from "../middleware/authmiddleware.js";
+myRouter.get('/',verifyToken, getAllServices);
+myRouter.post('/create', verifyToken, createService);
+myRouter.delete('/:serviceCode', verifyToken, deleteService);
+myRouter.put('/:serviceCode', verifyToken, updateService);
+myRouter.get('/:serviceCode', verifyToken, getServiceByCode);
 export default myRouter;
