@@ -6,7 +6,7 @@ export const getAllServices = (req, res) => {
     db.query(query, (err, results) => {
         if (err) {
             console.error('Get All Services DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         res.status(200).json(results);
     });
@@ -22,7 +22,7 @@ export const createService = (req, res) => {
     db.query(query, [serviceCode, servicename, servicePrice], (err, results) => {
         if (err) {
             console.error('Create Service DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         res.status(201).json({ message: 'Service created successfully' });
     });
@@ -35,7 +35,7 @@ export const deleteService = (req, res) => {
     db.query(query, [serviceCode], (err, results) => {
         if (err) {
             console.error('Delete Service DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         res.status(200).json({ message: 'Service deleted successfully' });
     });
@@ -49,7 +49,7 @@ export const updateService = (req, res) => {
     db.query(query, [servicename, servicePrice, serviceCode], (err, results) => {
         if (err) {
             console.error('Update Service DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         res.status(200).json({ message: 'Service updated successfully' });
     });
@@ -62,7 +62,7 @@ export const getServiceByCode = (req, res) => {
     db.query(query, [serviceCode], (err, results) => {
         if (err) {
             console.error('Get Service by Code DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         if (results.length === 0) {
             return res.status(404).json({ message: 'Service not found' });

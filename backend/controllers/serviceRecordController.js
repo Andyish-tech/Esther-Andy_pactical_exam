@@ -9,7 +9,7 @@ export const getAllServiceRecords = (req, res) => {
     db.query(query, (err, results) => {
         if (err) {
             console.error('Get All Service Records DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         res.status(200).json(results);
     });
@@ -29,7 +29,7 @@ export const createServiceRecord = (req, res) => {
     db.query(query, [platenumber, serviceCode], (err, results) => {
         if (err) {
             console.error('Create Service Record DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         res.status(201).json({ message: 'Service record created successfully' });
     });
@@ -43,7 +43,7 @@ export const deleteServiceRecord = (req, res) => {
     db.query(query, [recordnumber], (err, results) => {
         if (err) {
             console.error('Delete Service Record DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         res.status(200).json({ message: 'Service record deleted successfully' });
     });
@@ -57,7 +57,7 @@ export const getServiceRecordByNumber = (req, res) => {
     db.query(query, [recordnumber], (err, results) => {
         if (err) {
             console.error('Get Service Record DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         if (results.length === 0) {
             return res.status(404).json({ message: 'Service record not found' });

@@ -10,7 +10,7 @@ export const createCar = (req, res) => {
     db.query(query, [platenumber, type, model, manufacturing_year, mechanicName], (err, results) => {
         if (err) {
             console.error('Create Car DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         res.status(201).json({ message: 'Car created successfully' });
     });
@@ -22,7 +22,7 @@ export const getAllCars = (req, res) => {
     db.query(query, (err, results) => {
         if (err) {
             console.error('Get All Cars DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         res.status(200).json(results);
     });
@@ -35,7 +35,7 @@ export const deleteCar = (req, res) => {
     db.query(query, [platenumber], (err, results) => {
         if (err) {
             console.error('Delete Car DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         res.status(200).json({ message: 'Car deleted successfully' });
     });
@@ -50,7 +50,7 @@ export const getCarByPlateNumber = (req, res) => {
     db.query(query, [platenumber], (err, results) => {
         if (err) {
             console.error('Get Car by Plate Number DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         if (results.length === 0) {
             return res.status(404).json({ message: 'Car not found' });
@@ -71,11 +71,13 @@ export const updateCar = (req, res) => {
         const query = 'UPDATE car SET type = ?, model = ?, manufacturing_year = ?, mechanicName = ?, driverPhone = ? WHERE platenumber = ?';
         db.query(query, [type, model, manufacturing_year, mechanicName, driverPhone, platenumber], (err, results) => {
             if (err) {
-                return res.status(500).json({ message: err});
+                console.error('Update Car DB error:', err);
+                return res.status(500).json({ message: 'An internal server error occurred.' });
             }
             res.status(200).json({ message: 'Car updated successfully' });
         });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error('Update Car server error:', error);
+        res.status(500).json({ message: 'An internal server error occurred.' });
     }
 }
