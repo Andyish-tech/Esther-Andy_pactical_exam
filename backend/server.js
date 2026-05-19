@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import mysql from 'mysql2';
 import authRoutes from './routes/auth.Routes.js';
+import carRoutes from './routes/car.Routes.js';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,4 +23,4 @@ app.get('/api', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
-
+app.use('/api/cars', carRoutes);
