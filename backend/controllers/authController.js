@@ -30,18 +30,16 @@ export const register = async(req, res) => {
                 if (err.code === 'ER_DUP_ENTRY') {
                     return res.status(409).json({ message: 'User already exists' });
                 }
-                return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+                return res.status(500).json({ message: 'An internal server error occurred.' });
             }
             res.status(201).json({ message: 'User created successfully' });
         });
     }                       
     catch (error) {
         console.error('Register server error:', error);
-        if (error && error.code) {
-            return res.status(500).json({ message: 'Database error', error: error.code, details: error.sqlMessage });
-        }
-        res.status(500).json({ message: 'Server error' });
-    }};
+        res.status(500).json({ message: 'An internal server error occurred.' });
+    }
+};
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
@@ -49,7 +47,7 @@ export const login = async (req, res) => {
     db.query(query, [email], async (err, results) => {
         if (err) {
             console.error('Login DB error:', err);
-            return res.status(500).json({ message: 'Database error', error: err.code, details: err.sqlMessage });
+            return res.status(500).json({ message: 'An internal server error occurred.' });
         }
         if (results.length === 0) return res.status(404).json({ message: 'User not found' });
         const user = results[0];
@@ -57,6 +55,11 @@ export const login = async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
         // Generate JWT token
-        const token = jwt.sign({ id: user.userId }, process.env.JWT_SECRET || 'crpms_secret_key', { expiresIn: '1h' });
+        if (!process.env.JWT_SECRET) {
+            console.error('CRITICAL: JWT_SECRET is not defined');
+            return res.status(500).json({ message: 'An internal server error occurred.' });
+        }
+        const token = jwt.sign({ id: user.userId, role: user.role || 'customer' }, process.env.JWT_SECRET, { expiresIn: '1h' });
         res.json({ token });
-    });};
+    });
+};
