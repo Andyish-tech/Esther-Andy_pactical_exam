@@ -41,6 +41,8 @@ export const deleteCar = (req, res) => {
     });
 };
 
+
+
 //get a car by plate number
 export const getCarByPlateNumber = (req, res) => {
     const { platenumber } = req.params;
@@ -55,4 +57,25 @@ export const getCarByPlateNumber = (req, res) => {
         }
         res.status(200).json(results[0]);
     });
-};
+}
+
+
+//update a car by plate number
+export const updateCar = (req, res) => {
+    try {
+        const { platenumber } = req.params;
+        const { type, model, manufacturing_year, mechanicName, driverPhone } = req.body;
+        if (!type || !model || !manufacturing_year || !mechanicName || !driverPhone) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+        const query = 'UPDATE car SET type = ?, model = ?, manufacturing_year = ?, mechanicName = ?, driverPhone = ? WHERE platenumber = ?';
+        db.query(query, [type, model, manufacturing_year, mechanicName, driverPhone, platenumber], (err, results) => {
+            if (err) {
+                return res.status(500).json({ message: err});
+            }
+            res.status(200).json({ message: 'Car updated successfully' });
+        });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}

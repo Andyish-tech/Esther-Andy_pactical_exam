@@ -11,16 +11,14 @@ import db from './db/db.js';
 
 app.use(cors());
 app.use(express.json());
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 app.get('/', (req, res) => {
   res.send('Hello World!');
-});
-app.get('/api', (req, res) => {
-  res.json({ message: 'API endpoint' });
 });
 
 app.use('/api/auth', authRoutes);
 app.use('/api/cars', carRoutes);
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+
