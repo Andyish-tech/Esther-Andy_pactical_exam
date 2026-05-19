@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import db from '../config/db.js';
+import db from '../db/db.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -17,6 +17,11 @@ export const register = async(req, res) => {
                 resolve(results);
             });
         });
+
+        if (checkUserResult.length > 0) {
+            return res.status(409).json({ message: 'User already exists' });
+        }
+
         // Insert new user into database
         const insertUserQuery = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
         db.query(insertUserQuery, [username, email, hashedPassword], (err, results) => {
