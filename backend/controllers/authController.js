@@ -6,7 +6,8 @@ dotenv.config();
 
 export const register = async(req, res) => {
     try{
-        const { username, email, password } = req.body;
+        const { username, email, password, role } = req.body;
+        const userRole = role || 'customer';
         //hash password
         const hashedPassword = await bcrypt.hash(password, 10);
         // Check if user already exists
@@ -23,8 +24,8 @@ export const register = async(req, res) => {
         }
 
         // Insert new user into database
-        const insertUserQuery = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-        db.query(insertUserQuery, [username, email, hashedPassword], (err, results) => {
+        const insertUserQuery = 'INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)';
+        db.query(insertUserQuery, [username, email, hashedPassword, userRole], (err, results) => {
             if (err) {
                 console.error('Register DB error:', err);
                 if (err.code === 'ER_DUP_ENTRY') {
