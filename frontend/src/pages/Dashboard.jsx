@@ -5,7 +5,7 @@ import api from '../utils/api';
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('overview');
-  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('user') || '{}'));
+  const [user] = useState(() => JSON.parse(localStorage.getItem('user') || '{}'));
   const [toast, setToast] = useState({ message: '', type: 'success' });
   const [loading, setLoading] = useState(true);
 
@@ -76,6 +76,7 @@ export default function Dashboard() {
   }, [showToast]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadAllData();
   }, [loadAllData]);
 
