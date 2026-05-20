@@ -15,12 +15,22 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 import db from './db/db.js';
 
+//Define the allowed domains for CORS
+const allowedDomains = [process.env.FRONTEND_URL || 'http://localhost:5173'];
 // Apply security headers
 app.use(helmet());
 
 // Configure CORS
 const corsOptions = {
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: (origin, callback) => {
+        if (!origin || allowedDomains.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods:'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials:true,
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
