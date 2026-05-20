@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2026 at 01:24 PM
+-- Generation Time: May 20, 2026 at 09:33 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -36,6 +36,18 @@ CREATE TABLE `car` (
   `mechanicName` varchar(60) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `car`
+--
+
+INSERT INTO `car` (`platenumber`, `type`, `model`, `driverPhone`, `manufacturing_year`, `mechanicName`) VALUES
+('RAB 123 A', 'Toyota', 'colora', NULL, '2001', 'karisa'),
+('RAB 323 A', 'Toyota', ' Rava 4', NULL, '2014', 'Gasana'),
+('RAD123X', 'Toyota', 'Rava 4', '1987654321', '2024', 'GISUBIZO'),
+('RAG123A', 'Toyota', 'Rava 4', NULL, '2024', 'GISUBIZO'),
+('RAG123C', 'Toyota', 'Rava 4', NULL, '2024', 'GISUBIZO'),
+('RAG123D', 'Toyota', 'Rava 4', NULL, '2024', 'GISUBIZO');
+
 -- --------------------------------------------------------
 
 --
@@ -43,7 +55,7 @@ CREATE TABLE `car` (
 --
 
 CREATE TABLE `payment` (
-  `paymentnumber` varchar(30) NOT NULL,
+  `paymentnumber` int(30) NOT NULL,
   `payment_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `amountPaid` int(11) DEFAULT NULL,
   `platenumber` varchar(40) DEFAULT NULL,
@@ -62,6 +74,16 @@ CREATE TABLE `service` (
   `servicePrice` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `service`
+--
+
+INSERT INTO `service` (`serviceCode`, `servicename`, `servicePrice`) VALUES
+('SRV-101', 'Wheel Alignment & Balancing', 80),
+('SRV-102', 'Brake Pad Replacement', 185),
+('SRV-103', 'Wheel Alignment & Balancing', 90),
+('SRV-201', 'Full Engine Diagnostics', 120);
+
 -- --------------------------------------------------------
 
 --
@@ -69,11 +91,21 @@ CREATE TABLE `service` (
 --
 
 CREATE TABLE `service_record` (
-  `recordnumber` varchar(40) NOT NULL,
+  `recordnumber` int(40) NOT NULL,
   `platenumber` varchar(40) DEFAULT NULL,
   `serviceCode` varchar(40) DEFAULT NULL,
   `service_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `service_record`
+--
+
+INSERT INTO `service_record` (`recordnumber`, `platenumber`, `serviceCode`, `service_date`) VALUES
+(1, 'RAD123X', 'SRV-101', '2026-05-19 13:36:11'),
+(2, 'RAD123X', 'SRV-101', '2026-05-19 13:38:49'),
+(3, 'RAD123X', 'SRV-101', '2026-05-19 13:41:19'),
+(4, 'RAD123X', 'SRV-101', '2026-05-19 14:35:09');
 
 -- --------------------------------------------------------
 
@@ -87,6 +119,14 @@ CREATE TABLE `users` (
   `email` varchar(100) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`userId`, `username`, `email`, `password`) VALUES
+(3, 'crpms_user', 'crpms@gmail.com', '$2b$10$drNOHawFsTq5HqT8.jLRB.l0uRKr7SozHTft0zdS5th4n5To6jTdm'),
+(4, 'crpms_user2', 'crpms2@gmail.com', '$2b$10$vQLj8iiWuxbvBDrVTQKu6.5fvaX7jPEOuf9NEkhgc1I/iqclQdHKK');
 
 --
 -- Indexes for dumped tables
@@ -132,10 +172,22 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `paymentnumber` int(30) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `service_record`
+--
+ALTER TABLE `service_record`
+  MODIFY `recordnumber` int(40) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
