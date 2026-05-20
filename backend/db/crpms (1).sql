@@ -117,16 +117,18 @@ CREATE TABLE `users` (
   `userId` int(11) NOT NULL,
   `username` varchar(40) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL
+  `password` varchar(255) DEFAULT NULL,
+  `role` varchar(20) DEFAULT 'customer'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userId`, `username`, `email`, `password`) VALUES
-(3, 'crpms_user', 'crpms@gmail.com', '$2b$10$drNOHawFsTq5HqT8.jLRB.l0uRKr7SozHTft0zdS5th4n5To6jTdm'),
-(4, 'crpms_user2', 'crpms2@gmail.com', '$2b$10$vQLj8iiWuxbvBDrVTQKu6.5fvaX7jPEOuf9NEkhgc1I/iqclQdHKK');
+INSERT INTO `users` (`userId`, `username`, `email`, `password`, `role`) VALUES
+(3, 'crpms_user', 'crpms@gmail.com', '$2b$10$drNOHawFsTq5HqT8.jLRB.l0uRKr7SozHTft0zdS5th4n5To6jTdm', 'customer'),
+(4, 'crpms_user2', 'crpms2@gmail.com', '$2b$10$vQLj8iiWuxbvBDrVTQKu6.5fvaX7jPEOuf9NEkhgc1I/iqclQdHKK', 'customer'),
+(5, 'admin_user', 'admin@crpms.com', '$2b$10$drNOHawFsTq5HqT8.jLRB.l0uRKr7SozHTft0zdS5th4n5To6jTdm', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -187,7 +189,7 @@ ALTER TABLE `service_record`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
