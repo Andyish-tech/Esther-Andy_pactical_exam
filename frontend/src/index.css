@@ -4,15 +4,15 @@
 
 :root {
   font-family: 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
-  background-color: #090d16;
-  color: #f1f5f9;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #090d16;
-  color: #f1f5f9;
+  background-color: #ffffff;
+  color: #000000;
 }
 
 /* Custom scrollbars */
@@ -21,52 +21,46 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: #ffffff;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #e4e4e7;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #a1a1aa; /* gray-400 */
 }
 
-/* Glassmorphism Classes */
+/* Grayscale styling classes */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  border: 1px solid #000000;
 }
 
 .glass-card {
-  background: rgba(22, 28, 45, 0.45);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
 }
 
 .glass-input {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #f1f5f9;
-  transition: all 0.25s ease;
+  background: #ffffff;
+  border: 1px solid #000000;
+  color: #000000;
+  transition: all 0.2s ease;
 }
 
 .glass-input:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  border-color: #a1a1aa; /* gray-400 hover */
   outline: none;
 }
 
 .glass-card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s ease-in-out;
 }
 .glass-card-hover:hover {
-  transform: translateY(-4px);
-  border-color: rgba(99, 102, 241, 0.25);
-  box-shadow: 0 12px 40px 0 rgba(99, 102, 241, 0.1);
+  transform: translateY(-2px);
+  border-color: #a1a1aa; /* gray-400 hover */
 }
 
 /* Keyframes and Animations */
@@ -82,12 +76,11 @@ body {
 }
 
 .animate-fade-in {
-  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Custom Gradient Text */
+/* Grayscale text placeholder */
 .text-gradient {
-  background: linear-gradient(135deg, #a78bfa 0%, #6366f1 50%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #000000;
+  font-weight: 800;
 }
