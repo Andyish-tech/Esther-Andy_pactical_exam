@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Sidebar from '../components/Sidebar';
 import Toast from '../components/Toast';
 import api from '../utils/api';
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('overview');
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('user') || '{}'));
   const [toast, setToast] = useState({ message: '', type: 'success' });
   const [loading, setLoading] = useState(true);
 
@@ -49,20 +49,11 @@ export default function Dashboard() {
     serviceCode: ''
   });
 
-  useEffect(() => {
-    // Get logged in user details
-    const userData = JSON.parse(localStorage.getItem('user') || '{}');
-    setUser(userData);
-
-    // Initial Load of all tables
-    loadAllData();
+  const showToast = useCallback((message, type = 'success') => {
+    setToast({ message, type });
   }, []);
 
-  const showToast = (message, type = 'success') => {
-    setToast({ message, type });
-  };
-
-  const loadAllData = async () => {
+  const loadAllData = useCallback(async () => {
     setLoading(true);
     try {
       const [carsRes, servicesRes, recordsRes, paymentsRes] = await Promise.all([
@@ -82,7 +73,11 @@ export default function Dashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [showToast]);
+
+  useEffect(() => {
+    loadAllData();
+  }, [loadAllData]);
 
   // ---------------- CAR CRUD HANDLERS ----------------
   const handleCarSubmit = async (e) => {
