@@ -60,22 +60,22 @@ export default function Register() {
   };
 
   return (
-    <div className="min-height-screen bg-[#090d16] text-[#f1f5f9] relative overflow-hidden flex flex-col justify-center items-center px-6 py-12">
-      {/* Background blobs */}
-      <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-[#6366f1]/5 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-[20%] right-[10%] w-[350px] h-[350px] bg-[#3b82f6]/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <div className="min-h-screen bg-white text-black relative overflow-hidden flex flex-col justify-center items-center px-6 py-12">
+      {/* Subtle background decoration */}
+      <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-gray-100 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-[20%] right-[10%] w-[350px] h-[350px] bg-gray-100 rounded-full blur-[100px] pointer-events-none"></div>
 
       <div className="w-full max-w-md glass-card rounded-2xl p-8 relative z-10 animate-fade-in">
         <div className="text-center mb-8">
-          <Link to="/" className="text-3xl font-extrabold tracking-tight text-gradient mb-2 inline-block">
+          <Link to="/" className="text-3xl font-extrabold tracking-tight text-black mb-2 inline-block">
             CPRMS
           </Link>
-          <h2 className="text-xl font-bold text-slate-300">Create a new account</h2>
-          <p className="text-sm text-slate-500 mt-1">Get started with our system today</p>
+          <h2 className="text-xl font-bold text-black">Create a new account</h2>
+          <p className="text-sm text-gray-500 mt-1">Get started with our system today</p>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center gap-3">
+          <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-300 text-red-600 text-sm flex items-center gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
@@ -84,7 +84,7 @@ export default function Register() {
         )}
 
         {success && (
-          <div className="mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm flex items-center gap-3">
+          <div className="mb-6 p-4 rounded-xl bg-green-50 border border-green-300 text-green-700 text-sm flex items-center gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -94,9 +94,9 @@ export default function Register() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-slate-300 mb-2">Username</label>
+            <label className="block text-sm font-semibold text-black mb-2">Username</label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
@@ -113,9 +113,9 @@ export default function Register() {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-slate-300 mb-2">Email Address</label>
+            <label className="block text-sm font-semibold text-black mb-2">Email Address</label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                 </svg>
@@ -132,9 +132,9 @@ export default function Register() {
           </div>
 
           <div>
-            <label className="block text-sm font-semibold text-slate-300 mb-2">Password</label>
+            <label className="block text-sm font-semibold text-black mb-2">Password</label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -150,17 +150,17 @@ export default function Register() {
             </div>
           </div>
 
-          {/* Premium Account Role Card Selectors */}
+          {/* Account Role Card Selectors */}
           <div>
-            <label className="block text-sm font-semibold text-slate-300 mb-3">Register Account As</label>
+            <label className="block text-sm font-semibold text-black mb-3">Register Account As</label>
             <div className="grid grid-cols-2 gap-4">
               <button
                 type="button"
                 onClick={() => setRole('customer')}
                 className={`p-4 rounded-xl border flex flex-col items-center gap-2 transition-all duration-200 ${
                   role === 'customer'
-                    ? 'border-indigo-500 bg-indigo-500/10 text-indigo-400'
-                    : 'border-slate-800 bg-slate-900/50 hover:bg-slate-900/80 text-slate-400'
+                    ? 'border-black bg-black text-white'
+                    : 'border-gray-300 bg-white hover:border-[#a1a1aa] hover:bg-gray-50 text-gray-500 hover:text-[#a1a1aa]'
                 }`}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -174,8 +174,8 @@ export default function Register() {
                 onClick={() => setRole('admin')}
                 className={`p-4 rounded-xl border flex flex-col items-center gap-2 transition-all duration-200 ${
                   role === 'admin'
-                    ? 'border-indigo-500 bg-indigo-500/10 text-indigo-400'
-                    : 'border-slate-800 bg-slate-900/50 hover:bg-slate-900/80 text-slate-400'
+                    ? 'border-black bg-black text-white'
+                    : 'border-gray-300 bg-white hover:border-[#a1a1aa] hover:bg-gray-50 text-gray-500 hover:text-[#a1a1aa]'
                 }`}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -189,7 +189,7 @@ export default function Register() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 rounded-xl font-bold bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/20 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none mt-2"
+            className="w-full py-3.5 rounded-xl font-bold bg-black hover:bg-[#a1a1aa] text-white active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none mt-2"
           >
             {loading ? (
               <span className="flex items-center justify-center gap-2">
@@ -205,9 +205,9 @@ export default function Register() {
           </button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-slate-800/80 text-center text-sm text-slate-500">
+        <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
           Already have an account?{' '}
-          <Link to="/login" className="font-semibold text-indigo-400 hover:text-indigo-300 hover:underline">
+          <Link to="/login" className="font-semibold text-black hover:text-[#a1a1aa] hover:underline transition-colors duration-200">
             Sign in
           </Link>
         </div>

@@ -20,7 +20,7 @@ function PublicRoute({ children }) {
 
 function App() {
   return (
-    <div className="App min-h-screen bg-[#090d16] text-[#f1f5f9] flex flex-col">
+    <div className="App min-h-screen bg-white text-black flex flex-col">
       <Navigation />
       <main className="flex-grow flex flex-col">
         <Routes>

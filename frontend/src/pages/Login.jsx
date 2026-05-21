@@ -62,22 +62,22 @@ export default function Login() {
   };
 
   return (
-    <div className="min-height-screen bg-[#090d16] text-[#f1f5f9] relative overflow-hidden flex flex-col justify-center items-center px-6 py-12">
-      {/* Background blobs */}
-      <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-[#6366f1]/5 rounded-full blur-[100px] pointer-events-none"></div>
-      <div className="absolute bottom-[20%] right-[10%] w-[350px] h-[350px] bg-[#3b82f6]/5 rounded-full blur-[100px] pointer-events-none"></div>
+    <div className="min-h-screen bg-white text-black relative overflow-hidden flex flex-col justify-center items-center px-6 py-12">
+      {/* Subtle background decoration */}
+      <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-gray-100 rounded-full blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-[20%] right-[10%] w-[350px] h-[350px] bg-gray-100 rounded-full blur-[100px] pointer-events-none"></div>
 
       <div className="w-full max-w-md glass-card rounded-2xl p-8 relative z-10 animate-fade-in">
         <div className="text-center mb-8">
-          <Link to="/" className="text-3xl font-extrabold tracking-tight text-gradient mb-2 inline-block">
+          <Link to="/" className="text-3xl font-extrabold tracking-tight text-black mb-2 inline-block">
             CPRMS
           </Link>
-          <h2 className="text-xl font-bold text-slate-300">Sign in to your account</h2>
-          <p className="text-sm text-slate-500 mt-1">Manage vehicles and payments securely</p>
+          <h2 className="text-xl font-bold text-black">Sign in to your account</h2>
+          <p className="text-sm text-gray-500 mt-1">Manage vehicles and payments securely</p>
         </div>
 
         {error && (
-          <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-center gap-3">
+          <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-300 text-red-600 text-sm flex items-center gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
@@ -87,9 +87,9 @@ export default function Login() {
 
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-sm font-semibold text-slate-300 mb-2">Email Address</label>
+            <label className="block text-sm font-semibold text-black mb-2">Email Address</label>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                 </svg>
@@ -107,10 +107,10 @@ export default function Login() {
 
           <div>
             <div className="flex justify-between items-center mb-2">
-              <label className="block text-sm font-semibold text-slate-300">Password</label>
+              <label className="block text-sm font-semibold text-black">Password</label>
             </div>
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-500">
+              <span className="absolute inset-y-0 left-0 pl-3.5 flex items-center text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -129,7 +129,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3.5 rounded-xl font-bold bg-gradient-to-r from-indigo-600 to-indigo-500 hover:from-indigo-500 hover:to-indigo-400 text-white shadow-lg shadow-indigo-500/10 hover:shadow-indigo-500/20 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none mt-2"
+            className="w-full py-3.5 rounded-xl font-bold bg-black hover:bg-[#a1a1aa] text-white active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:pointer-events-none mt-2"
           >
             {loading ? (
               <span className="flex items-center justify-center gap-2">
@@ -145,9 +145,9 @@ export default function Login() {
           </button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-slate-800/80 text-center text-sm text-slate-500">
+        <div className="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
           Don't have an account?{' '}
-          <Link to="/register" className="font-semibold text-indigo-400 hover:text-indigo-300 hover:underline">
+          <Link to="/register" className="font-semibold text-black hover:text-[#a1a1aa] hover:underline transition-colors duration-200">
             Create an account
           </Link>
         </div>

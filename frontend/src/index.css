@@ -2,20 +2,28 @@
 
 @import "tailwindcss";
 
+/* ─── Design Tokens: White / Black / Gray-400 ─────────────────────────── */
 :root {
   font-family: 'Plus Jakarta Sans', 'Outfit', system-ui, -apple-system, sans-serif;
   background-color: #ffffff;
   color: #000000;
+
+  --color-bg:        #ffffff;
+  --color-text:      #000000;
+  --color-border:    #000000;
+  --color-hover:     #a1a1aa; /* gray-400 */
+  --color-muted:     #6b7280; /* gray-500  */
+  --color-surface:   #f9fafb; /* gray-50  */
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #ffffff;
-  color: #000000;
+  background-color: var(--color-bg);
+  color: var(--color-text);
 }
 
-/* Custom scrollbars */
+/* ─── Custom Scrollbars ───────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -31,7 +39,7 @@ body {
   background: #a1a1aa; /* gray-400 */
 }
 
-/* Grayscale styling classes */
+/* ─── Shared Utility Classes ──────────────────────────────────────────── */
 .glass-panel {
   background: #ffffff;
   border: 1px solid #000000;
@@ -40,18 +48,23 @@ body {
 .glass-card {
   background: #ffffff;
   border: 1px solid #000000;
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.06);
 }
 
 .glass-input {
   background: #ffffff;
   border: 1px solid #000000;
   color: #000000;
-  transition: all 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-input::placeholder {
+  color: #a1a1aa;
 }
 
 .glass-input:focus {
   border-color: #a1a1aa; /* gray-400 hover */
+  box-shadow: 0 0 0 3px rgba(161, 161, 170, 0.15);
   outline: none;
 }
 
@@ -61,9 +74,10 @@ body {
 .glass-card-hover:hover {
   transform: translateY(-2px);
   border-color: #a1a1aa; /* gray-400 hover */
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.08);
 }
 
-/* Keyframes and Animations */
+/* ─── Keyframes & Animations ──────────────────────────────────────────── */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -79,7 +93,7 @@ body {
   animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Grayscale text placeholder */
+/* ─── Typography ──────────────────────────────────────────────────────── */
 .text-gradient {
   color: #000000;
   font-weight: 800;
