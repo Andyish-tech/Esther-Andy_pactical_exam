@@ -12,10 +12,10 @@ export default function Welcome() {
         
         {/* Left Side: Text and CTA */}
         <div className="flex-1 text-left animate-fade-in">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-300 text-gray-600 text-sm font-semibold mb-6">
+          {/* <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-300 text-gray-600 text-sm font-semibold mb-6">
             <span className="w-2 h-2 rounded-full bg-black animate-ping"></span>
             Version 2.0 Now Live
-          </div>
+          </div> */}
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-5 sm:mb-6 text-black">
             Car Repair &amp; <br />
             <span className="text-gradient">Payment Management</span>

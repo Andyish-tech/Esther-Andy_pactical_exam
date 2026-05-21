@@ -288,7 +288,7 @@ export default function Dashboard() {
               </p>
             </div>
           </div>
-
+{/* 
           <div className="flex items-center gap-2 sm:gap-4 shrink-0">
             <button 
               onClick={loadAllData} 
@@ -303,7 +303,7 @@ export default function Dashboard() {
               <span className="w-2.5 h-2.5 rounded-full bg-black animate-pulse"></span>
               <span className="text-black">Live API Gate Connected</span>
             </div>
-          </div>
+          </div> */}
         </header>
 
         {/* Dashboard Workspace View switcher */}
@@ -398,7 +398,7 @@ export default function Dashboard() {
             </div>
             <div>
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Revenue Collected</p>
-              <h3 className="text-2xl font-black mt-1 text-black">${totalRevenue.toLocaleString()} Paid</h3>
+              <h3 className="text-2xl font-black mt-1 text-black">{totalRevenue.toLocaleString()} RWF</h3>
             </div>
           </div>
         </div>
@@ -530,8 +530,8 @@ export default function Dashboard() {
                       <tr key={pay.paymentnumber} className="border-b border-gray-100 hover:bg-gray-50 text-black">
                         <td className="py-3.5 font-mono text-xs font-bold text-gray-500">#{pay.paymentnumber}</td>
                         <td className="py-3.5 font-mono text-xs text-black uppercase">{pay.platenumber}</td>
-                        <td className="py-3.5 truncate max-w-[120px] text-xs text-gray-500" title={pay.servicename}>{pay.servicename}</td>
-                        <td className="py-3.5 font-extrabold text-black">${pay.amountPaid}</td>
+                        <td className="py-3.5 truncate max-w-30 text-xs text-gray-500" title={pay.servicename}>{pay.servicename}</td>
+                        <td className="py-3.5 font-extrabold text-black">{pay.amountPaid} RWF</td>
                       </tr>
                     ))}
                   </tbody>
@@ -721,7 +721,7 @@ export default function Dashboard() {
 
               <div className="mt-6 pt-4 border-t border-black flex items-center justify-between">
                 <span className="text-xs text-gray-500 font-semibold uppercase">Pricing standard</span>
-                <span className="text-2xl font-black text-black">${srv.servicePrice}</span>
+                <span className="text-2xl font-black text-black">{srv.servicePrice} RWF</span>
               </div>
             </div>
           ))}
@@ -786,11 +786,11 @@ export default function Dashboard() {
                       <td className="px-6 py-4 font-bold text-black">
                         {rec.type} <span className="font-normal text-gray-500 ml-1">{rec.model}</span>
                       </td>
-                      <td className="px-6 py-4 text-black font-semibold truncate max-w-[200px]" title={rec.servicename}>{rec.servicename}</td>
+                      <td className="px-6 py-4 text-black font-semibold truncate max-w-50" title={rec.servicename}>{rec.servicename}</td>
                       <td className="px-6 py-4 text-gray-500 text-xs">
                         {new Date(rec.service_date).toLocaleString()}
                       </td>
-                      <td className="px-6 py-4 font-extrabold text-black">${rec.servicePrice || 0}</td>
+                      <td className="px-6 py-4 font-extrabold text-black">{rec.servicePrice || 0} RWF</td>
                       <td className="px-6 py-4 text-right">
                         {user.role === 'admin' ? (
                           <button
@@ -868,9 +868,9 @@ export default function Dashboard() {
                         {new Date(pay.payment_date).toLocaleString()}
                       </td>
                       <td className="px-6 py-4 font-mono font-bold text-black uppercase">{pay.platenumber}</td>
-                      <td className="px-6 py-4 font-semibold text-black truncate max-w-[200px]" title={pay.servicename}>{pay.servicename}</td>
-                      <td className="px-6 py-4 font-semibold text-gray-500">${pay.servicePrice || 0}</td>
-                      <td className="px-6 py-4 font-extrabold text-black">${pay.amountPaid}</td>
+                      <td className="px-6 py-4 font-semibold text-black truncate max-w-40" title={pay.servicename}>{pay.servicename}</td>
+                      <td className="px-6 py-4 font-semibold text-gray-500">{pay.servicePrice || 0} RWF</td>
+                      <td className="px-6 py-4 font-extrabold text-black">{pay.amountPaid} RWF</td>
                       <td className="px-6 py-4 text-right">
                         {user.role === 'admin' ? (
                           <button
@@ -1059,7 +1059,7 @@ export default function Dashboard() {
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Pricing Standard ($)</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Pricing Standard (RWF)</label>
               <input
                 type="number"
                 placeholder="e.g. 150"
@@ -1200,14 +1200,14 @@ export default function Dashboard() {
                 <option value="" className="bg-white">-- Choose catalog service --</option>
                 {services.map(srv => (
                   <option key={srv.serviceCode} value={srv.serviceCode} className="bg-white">
-                    {srv.serviceCode} - {srv.servicename} (${srv.servicePrice})
+                    {srv.serviceCode} - {srv.servicename} ({srv.servicePrice} RWF)
                   </option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Amount Paid ($)</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Amount Paid (RWF)</label>
               <input
                 type="number"
                 placeholder="e.g. 150"
