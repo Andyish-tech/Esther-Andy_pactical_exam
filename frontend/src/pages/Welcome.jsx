@@ -8,7 +8,7 @@ export default function Welcome() {
       <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-gray-100 rounded-full blur-[120px] pointer-events-none"></div>
 
       {/* Hero Section */}
-      <div className="max-w-7xl mx-auto px-6 py-20 flex-1 flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16 lg:py-20 flex-1 flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-12 relative z-10">
         
         {/* Left Side: Text and CTA */}
         <div className="flex-1 text-left animate-fade-in">
@@ -16,14 +16,14 @@ export default function Welcome() {
             <span className="w-2 h-2 rounded-full bg-black animate-ping"></span>
             Version 2.0 Now Live
           </div>
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6 text-black">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-5 sm:mb-6 text-black">
             Car Repair &amp; <br />
             <span className="text-gradient">Payment Management</span>
           </h1>
-          <p className="text-lg text-gray-500 mb-8 max-w-lg leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-500 mb-6 sm:mb-8 max-w-lg leading-relaxed">
             Welcome to CRPMS, the ultimate modern platform to track vehicle maintenance history, manage repair services, assign expert mechanics, and record billing logs seamlessly.
           </p>
-          <div className="flex flex-wrap gap-4">
+          <div className="flex flex-wrap gap-3 sm:gap-4">
             <Link
               to="/register"
               className="px-8 py-4 rounded-xl font-bold bg-black hover:bg-[#a1a1aa] text-white hover:scale-105 active:scale-95 transition-all duration-200"
@@ -41,7 +41,7 @@ export default function Welcome() {
 
         {/* Right Side: Graphic Illustration */}
         <div className="flex-1 flex justify-center items-center relative z-10 animate-fade-in" style={{ animationDelay: '0.15s' }}>
-          <div className="relative w-full max-w-[480px] aspect-square rounded-2xl glass-card flex items-center justify-center p-8">
+          <div className="relative w-full max-w-[320px] sm:max-w-[400px] lg:max-w-[480px] aspect-square rounded-2xl glass-card flex items-center justify-center p-6 sm:p-8">
             <div className="absolute inset-0 bg-gray-50 rounded-2xl"></div>
             
             {/* SVG Dashboard Graphic */}
@@ -92,7 +92,7 @@ export default function Welcome() {
       </div>
 
       {/* Feature Grid */}
-      <div className="max-w-7xl mx-auto px-6 py-12 relative z-10 w-full animate-fade-in" style={{ animationDelay: '0.3s' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10 w-full animate-fade-in" style={{ animationDelay: '0.3s' }}>
         <h2 className="text-2xl font-bold mb-8 text-center text-black">Features at a Glance</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Card 1 */}
