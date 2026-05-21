@@ -5,6 +5,7 @@ import api from '../utils/api';
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState('overview');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user] = useState(() => JSON.parse(localStorage.getItem('user') || '{}'));
   const [toast, setToast] = useState({ message: '', type: 'success' });
   const [loading, setLoading] = useState(true);
@@ -257,21 +258,38 @@ export default function Dashboard() {
 
   return (
     <div className="flex min-h-screen bg-white text-black font-sans">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Sidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
       
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Header */}
-        <header className="border-b border-black bg-white px-8 py-5 flex items-center justify-between sticky top-0 z-40">
-          <div>
-            <h1 className="text-2xl font-extrabold tracking-tight text-black capitalize">
-              {activeTab === 'overview' ? 'Dashboard Overview' : `${activeTab} Management`}
-            </h1>
-            <p className="text-gray-500 text-xs mt-0.5">
-              Current local session: {new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-            </p>
+        <header className="border-b border-black bg-white px-4 sm:px-8 py-4 sm:py-5 flex items-center justify-between sticky top-0 z-40 gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            {/* Mobile hamburger to open sidebar */}
+            <button
+              className="lg:hidden p-2 rounded-xl border border-black text-black hover:border-[#a1a1aa] hover:text-[#a1a1aa] transition-all shrink-0"
+              onClick={() => setSidebarOpen(true)}
+              aria-label="Open sidebar"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <div className="min-w-0">
+              <h1 className="text-lg sm:text-2xl font-extrabold tracking-tight text-black capitalize truncate">
+                {activeTab === 'overview' ? 'Dashboard Overview' : `${activeTab} Management`}
+              </h1>
+              <p className="text-gray-500 text-xs mt-0.5 hidden sm:block">
+                Current local session: {new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+              </p>
+            </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 shrink-0">
             <button 
               onClick={loadAllData} 
               className="p-2 rounded-xl border border-black hover:border-[#a1a1aa] bg-white hover:bg-gray-100 text-gray-500 hover:text-[#a1a1aa] transition-all"
@@ -281,7 +299,7 @@ export default function Dashboard() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 19l-2.47-2.47" />
               </svg>
             </button>
-            <div className="flex items-center gap-2 border-l border-black pl-4 text-xs font-semibold">
+            <div className="hidden sm:flex items-center gap-2 border-l border-black pl-4 text-xs font-semibold">
               <span className="w-2.5 h-2.5 rounded-full bg-black animate-pulse"></span>
               <span className="text-black">Live API Gate Connected</span>
             </div>
@@ -289,7 +307,7 @@ export default function Dashboard() {
         </header>
 
         {/* Dashboard Workspace View switcher */}
-        <main className="p-8 flex-1 overflow-y-auto max-w-7xl w-full mx-auto">
+        <main className="p-4 sm:p-6 lg:p-8 flex-1 overflow-y-auto max-w-7xl w-full mx-auto">
           {loading ? (
             <div className="h-[60vh] flex flex-col items-center justify-center gap-4">
               <svg className="animate-spin h-10 w-10 text-black" fill="none" viewBox="0 0 24 24">
@@ -641,7 +659,7 @@ export default function Dashboard() {
   function renderServices() {
     return (
       <div className="space-y-6 text-left">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
           <h2 className="text-xl font-bold text-black">System Service Catalog</h2>
           {user.role === 'admin' && (
             <button
@@ -723,7 +741,7 @@ export default function Dashboard() {
   function renderRecords() {
     return (
       <div className="space-y-6 text-left">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
           <h2 className="text-xl font-bold text-black">Maintenance Log Sheets</h2>
           <button
             onClick={() => {
@@ -805,7 +823,7 @@ export default function Dashboard() {
   function renderPayments() {
     return (
       <div className="space-y-6 text-left">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row gap-3 sm:items-center justify-between">
           <h2 className="text-xl font-bold text-black">System Billing Logs</h2>
           <button
             onClick={() => {
@@ -903,7 +921,7 @@ export default function Dashboard() {
           </div>
 
           <form onSubmit={handleCarSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Plate Number</label>
                 <input
@@ -931,7 +949,7 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-1.5">Brand / Make</label>
                 <input

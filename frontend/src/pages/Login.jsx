@@ -62,7 +62,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black relative overflow-hidden flex flex-col justify-center items-center px-6 py-12">
+    <div className="min-h-screen bg-white text-black relative overflow-hidden flex flex-col justify-center items-center px-4 sm:px-6 py-10 sm:py-12">
       {/* Subtle background decoration */}
       <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-gray-100 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-[20%] right-[10%] w-[350px] h-[350px] bg-gray-100 rounded-full blur-[100px] pointer-events-none"></div>
