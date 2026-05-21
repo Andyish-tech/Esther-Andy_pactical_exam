@@ -26,9 +26,9 @@ export default function Login() {
       
       // Decode JWT token payload to extract role and id
       try {
-        const payloadBase64 = token.split('.')[1];
+        const payloadBase64 = token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/');
         const payloadDecoded = JSON.parse(atob(payloadBase64));
-        
+
         localStorage.setItem('token', token);
         localStorage.setItem('user', JSON.stringify({
           email: email,

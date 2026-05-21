@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Sidebar from '../components/Sidebar';
 import Toast from '../components/Toast';
+import ConfirmModal from '../components/ConfirmModal';
 import api from '../utils/api';
 
 export default function Dashboard() {
@@ -8,6 +9,7 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [user] = useState(() => JSON.parse(localStorage.getItem('user') || '{}'));
   const [toast, setToast] = useState({ message: '', type: 'success' });
+  const [confirm, setConfirm] = useState({ show: false, message: '', onConfirm: null });
   const [loading, setLoading] = useState(true);
 
   // Core Data Lists
@@ -77,7 +79,6 @@ export default function Dashboard() {
   }, [showToast]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadAllData();
   }, [loadAllData]);
 
@@ -127,15 +128,21 @@ export default function Dashboard() {
   };
 
   const handleCarDelete = async (platenumber) => {
-    if (!window.confirm(`Are you sure you want to remove vehicle ${platenumber}?`)) return;
-    try {
-      await api.delete(`/cars/${platenumber}`);
-      showToast('Vehicle deleted successfully');
-      loadAllData();
-    } catch (err) {
-      console.error('Car delete error:', err);
-      showToast(err.response?.data?.message || 'Unauthorized or failed to delete vehicle.', 'error');
-    }
+    setConfirm({
+      show: true,
+      message: `Are you sure you want to remove vehicle ${platenumber}?`,
+      onConfirm: async () => {
+        setConfirm({ show: false, message: '', onConfirm: null });
+        try {
+          await api.delete(`/cars/${platenumber}`);
+          showToast('Vehicle deleted successfully');
+          loadAllData();
+        } catch (err) {
+          console.error('Car delete error:', err);
+          showToast(err.response?.data?.message || 'Unauthorized or failed to delete vehicle.', 'error');
+        }
+      }
+    });
   };
 
   // ---------------- SERVICE CRUD HANDLERS ----------------
@@ -171,15 +178,21 @@ export default function Dashboard() {
   };
 
   const handleServiceDelete = async (code) => {
-    if (!window.confirm(`Are you sure you want to remove service ${code}?`)) return;
-    try {
-      await api.delete(`/services/${code}`);
-      showToast('Service deleted successfully');
-      loadAllData();
-    } catch (err) {
-      console.error('Service delete error:', err);
-      showToast(err.response?.data?.message || 'Only Admin users can delete service catalog.', 'error');
-    }
+    setConfirm({
+      show: true,
+      message: `Are you sure you want to remove service ${code}?`,
+      onConfirm: async () => {
+        setConfirm({ show: false, message: '', onConfirm: null });
+        try {
+          await api.delete(`/services/${code}`);
+          showToast('Service deleted successfully');
+          loadAllData();
+        } catch (err) {
+          console.error('Service delete error:', err);
+          showToast(err.response?.data?.message || 'Only Admin users can delete service catalog.', 'error');
+        }
+      }
+    });
   };
 
   // ---------------- SERVICE RECORD HANDLERS ----------------
@@ -202,15 +215,21 @@ export default function Dashboard() {
   };
 
   const handleRecordDelete = async (id) => {
-    if (!window.confirm('Delete this service record?')) return;
-    try {
-      await api.delete(`/service-records/${id}`);
-      showToast('Service record deleted');
-      loadAllData();
-    } catch (err) {
-      console.error('Record delete error:', err);
-      showToast(err.response?.data?.message || 'Only Admin users can delete service records.', 'error');
-    }
+    setConfirm({
+      show: true,
+      message: 'Delete this service record?',
+      onConfirm: async () => {
+        setConfirm({ show: false, message: '', onConfirm: null });
+        try {
+          await api.delete(`/service-records/${id}`);
+          showToast('Service record deleted');
+          loadAllData();
+        } catch (err) {
+          console.error('Record delete error:', err);
+          showToast(err.response?.data?.message || 'Only Admin users can delete service records.', 'error');
+        }
+      }
+    });
   };
 
   // ---------------- PAYMENT HANDLERS ----------------
@@ -222,7 +241,7 @@ export default function Dashboard() {
     }
     try {
       await api.post('/payments/create', {
-        amountPaid: parseInt(paymentForm.amountPaid),
+        amountPaid: parseFloat(paymentForm.amountPaid) || 0,
         platenumber: paymentForm.platenumber,
         serviceCode: paymentForm.serviceCode
       });
@@ -237,15 +256,21 @@ export default function Dashboard() {
   };
 
   const handlePaymentDelete = async (id) => {
-    if (!window.confirm('Void this payment receipt?')) return;
-    try {
-      await api.delete(`/payments/${id}`);
-      showToast('Payment voided and deleted');
-      loadAllData();
-    } catch (err) {
-      console.error('Payment void error:', err);
-      showToast(err.response?.data?.message || 'Only Admin users can delete payment files.', 'error');
-    }
+    setConfirm({
+      show: true,
+      message: 'Void this payment receipt?',
+      onConfirm: async () => {
+        setConfirm({ show: false, message: '', onConfirm: null });
+        try {
+          await api.delete(`/payments/${id}`);
+          showToast('Payment voided and deleted');
+          loadAllData();
+        } catch (err) {
+          console.error('Payment void error:', err);
+          showToast(err.response?.data?.message || 'Only Admin users can delete payment files.', 'error');
+        }
+      }
+    });
   };
 
   // Filter cars based on search query
@@ -330,6 +355,14 @@ export default function Dashboard() {
 
       {/* Dynamic Notifications */}
       <Toast message={toast.message} type={toast.type} onClose={() => setToast({ message: '', type: 'success' })} />
+
+      {/* Confirm Modal */}
+      <ConfirmModal
+        show={confirm.show}
+        message={confirm.message}
+        onConfirm={confirm.onConfirm || (() => {})}
+        onCancel={() => setConfirm({ show: false, message: '', onConfirm: null })}
+      />
 
       {/* ---------------- MODALS CODE ---------------- */}
       {carModal.show && renderCarModal()}
@@ -996,7 +1029,6 @@ export default function Dashboard() {
                   value={carForm.driverPhone}
                   onChange={(e) => setCarForm({ ...carForm, driverPhone: e.target.value })}
                   className="w-full px-4 py-2.5 rounded-xl glass-input text-sm font-mono"
-                  required
                 />
               </div>
             )}

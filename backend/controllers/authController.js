@@ -6,8 +6,8 @@ dotenv.config();
 
 export const register = async(req, res) => {
     try{
-        const { username, email, password, role } = req.body;
-        const userRole = role || 'customer';
+        const { username, email, password } = req.body;
+        const userRole = 'customer'; // Always force 'customer' role — admin assignment is manual
         //hash password
         const hashedPassword = await bcrypt.hash(password, 10);
         // Check if user already exists
