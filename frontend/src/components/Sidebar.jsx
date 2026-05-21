@@ -78,11 +78,11 @@ export default function Sidebar({ activeTab, setActiveTab, isOpen, onClose }) {
       {/* Sidebar panel */}
       <aside
         className={`
-          fixed top-0 left-0 h-full z-50 w-72
+          fixed top-0 left-0 z-50 w-72 h-full
           bg-white border-r border-black
           flex flex-col justify-between
           transition-transform duration-300 ease-in-out
-          lg:relative lg:translate-x-0 lg:w-64 lg:z-auto lg:shrink-0
+          lg:sticky lg:top-0 lg:h-screen lg:translate-x-0 lg:w-64 lg:z-40 lg:shrink-0 lg:transition-none
           ${isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'}
         `}
       >
